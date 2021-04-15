@@ -3,5 +3,5 @@ project(MultithreadingPhilosophersCPP)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/philosopher.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
