@@ -7,11 +7,13 @@
 #ifndef MULTITHREADINGPHILOSOPHERSCPP_PHILOSOPHER_HPP
 #define MULTITHREADINGPHILOSOPHERSCPP_PHILOSOPHER_HPP
 
-class Philosopher {
- public:
+namespace simulation {
+  class Philosopher {
+   public:
 
- private:
-  int id_;
-};
+   private:
+    int id_;
+  };
+}
 
 #endif //MULTITHREADINGPHILOSOPHERSCPP_PHILOSOPHER_HPP
