@@ -3,5 +3,3 @@
 //
 
 #include "philosopher.hpp"
-
-Philosopher::Philosopher(int id) : id_(id) {}
