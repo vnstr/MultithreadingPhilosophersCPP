@@ -50,6 +50,26 @@ namespace simulation {
     nb_of_times_each_should_eat_ = nb_of_times_each_should_eat;
   }
 
+  int  Config::GetPhilosophersAmount() const {
+    return philosophers_amount_;
+  }
+
+  int  Config::GetLifetime() const {
+    return lifetime_;
+  }
+
+  int  Config::GetEatingTime() const {
+    return eating_time_;
+  }
+
+  int  Config::GetSleepingTime() const {
+    return sleeping_time_;
+  }
+
+  int  Config::GetNbOfTimesEachShouldEat() const {
+    return nb_of_times_each_should_eat_;
+  }
+
   // Exception  --------------------------------------------------------------
   const char* Config::ConfigError::what() const noexcept {
     return "bad configuration";

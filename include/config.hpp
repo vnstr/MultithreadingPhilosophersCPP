@@ -21,6 +21,11 @@ namespace simulation {
     void SetEatingTime(int eating_time);
     void SetSleepingTime(int sleeping_time);
     void SetNbOfTimesEachShouldEat(int nb_of_times_each_should_eat);
+    int  GetPhilosophersAmount() const;
+    int  GetLifetime() const;
+    int  GetEatingTime() const;
+    int  GetSleepingTime() const;
+    int  GetNbOfTimesEachShouldEat() const;
 
     // Exception  --------------------------------------------------------------
     class ConfigError {
