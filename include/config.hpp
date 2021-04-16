@@ -10,6 +10,7 @@
 # include <map>
 
 namespace simulation {
+  // TODO(gdrive): singleton
   class Config {
    public:
     // Modifiers ---------------------------------------------------------------
