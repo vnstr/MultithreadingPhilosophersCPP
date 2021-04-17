@@ -15,12 +15,16 @@
 namespace sim {
   class Philosopher {
    public:
-    Philosopher(int id);
+    Philosopher() = default;
+    explicit Philosopher(int id);
+
+    // Setters
+    void SetId(int id);
 
     utils::Timer timer;
 
    private:
-    int id_;
+    int id_{};
     std::shared_ptr<sim::Fork> left_fork_;
     std::shared_ptr<sim::Fork> right_fork_;
   };

@@ -3,9 +3,9 @@
 //
 
 // condition_variable::notify_one
-#include <thread>             // std::thread
-#include <condition_variable> // std::condition_variable
-//#include <mutex>              // std::mutex, std::unique_lock
+#include <thread>              // std::thread
+#include <condition_variable>  // std::condition_variable
+//#include <mutex>             // std::mutex, std::unique_lock
 #include <chrono>
 //#include <future>
 
@@ -14,7 +14,7 @@
 #include <iostream>
 
 #include "config.hpp"
-#include "philosopher.hpp"
+#include "table.hpp"
 
 std::mutex starting;
 std::condition_variable alarm_clock;
@@ -27,5 +27,7 @@ void live(sim::Philosopher &p) {
 
 int main(int argc, char **argv) {
   std::cout << "Hello world" << std::endl;
+  sim::Config::Instance().Configurate(argc - 1, argv + 1);
+  sim::Table table;
   return 0;
 }

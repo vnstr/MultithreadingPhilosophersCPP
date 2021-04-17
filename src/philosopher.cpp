@@ -4,4 +4,11 @@
 
 #include "philosopher.hpp"
 
-sim::Philosopher::Philosopher(int id) : id_(id) {}
+namespace sim{
+  sim::Philosopher::Philosopher(int id) : id_(id) {}
+
+  // Setters
+  void sim::Philosopher::SetId(int id) {
+    id_ = id;
+  }
+}
