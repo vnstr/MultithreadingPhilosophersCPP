@@ -18,8 +18,9 @@ namespace sim {
     Philosopher() = default;
     explicit Philosopher(int id);
 
-    // Setters
+    // Setters, getters
     void SetId(int id);
+    int  GetId() const;
 
     utils::Timer timer;
 

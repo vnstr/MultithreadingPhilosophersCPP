@@ -7,8 +7,12 @@
 namespace sim{
   sim::Philosopher::Philosopher(int id) : id_(id) {}
 
-  // Setters
+  // Setters, getters
   void sim::Philosopher::SetId(int id) {
     id_ = id;
+  }
+
+  int Philosopher::GetId() const {
+    return id_;
   }
 }

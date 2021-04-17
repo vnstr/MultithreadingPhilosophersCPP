@@ -16,6 +16,8 @@ namespace sim {
    public:
     Table();
 
+    void Visualize();
+
    private:
     std::unique_ptr<Philosopher[]> philosophers_;
     int philosopher_amount_;
