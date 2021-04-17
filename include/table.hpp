@@ -19,7 +19,8 @@ namespace sim {
     void Visualize();
 
    private:
-    std::unique_ptr<Philosopher[]> philosophers_;
+    std::unique_ptr<sim::Philosopher[]> philosophers_;
+    std::unique_ptr<sim::Fork[]>        forks_;
     int philosopher_amount_;
   };
 }

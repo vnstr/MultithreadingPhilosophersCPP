@@ -12,11 +12,16 @@
 namespace sim {
   class Fork {
    public:
-    Fork(int id);
+    Fork() = default;
+
+    void SetId(int id);
+    int  GetId() const;
+
+    explicit Fork(int id);
 
    private:
-    int id_;
-    std::mutex mutex_;
+    int id_{};
+    std::mutex mutex_{};
   };
 }
 

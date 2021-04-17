@@ -29,6 +29,7 @@ int main(int argc, char **argv) {
   std::cout << "Hello world" << std::endl;
   sim::Config::Instance().Configurate(argc - 1, argv + 1);
   sim::Table table;
+
   table.Visualize();
   return 0;
 }
