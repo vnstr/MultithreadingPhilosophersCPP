@@ -9,7 +9,7 @@
 
 # include <map>
 
-namespace simulation {
+namespace sim {
   // TODO(gdrive): singleton
   class Config {
     // Singleton ---------------------------------------------------------------

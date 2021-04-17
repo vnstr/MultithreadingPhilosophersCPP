@@ -7,7 +7,7 @@
 #include "config.hpp"
 #include "utils.hpp"
 
-namespace simulation {
+namespace sim {
   // Singleton ---------------------------------------------------------------
   Config &Config::Instance() {
     static Config singleton;

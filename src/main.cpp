@@ -4,23 +4,28 @@
 
 // condition_variable::notify_one
 #include <thread>             // std::thread
+#include <condition_variable> // std::condition_variable
 //#include <mutex>              // std::mutex, std::unique_lock
 #include <chrono>
-//#include <condition_variable> // std::condition_variable
 //#include <future>
+
+#include <unistd.h>
 
 #include <iostream>
 
 #include "config.hpp"
 #include "philosopher.hpp"
 
-void live(simulation::Philosopher &p) {
-  std::this_thread::sleep_for(std::chrono::seconds(3));
+std::mutex starting;
+std::condition_variable alarm_clock;
+bool start = false;
+
+void live(sim::Philosopher &p) {
+  std::unique_lock<std::mutex> lg(starting);
+  while (!start) {alarm_clock.wait(lg);}
 }
 
 int main(int argc, char **argv) {
   std::cout << "Hello world" << std::endl;
-
-  simulation::Config::Instance().Configurate(argc - 1, argv + 1);
   return 0;
 }

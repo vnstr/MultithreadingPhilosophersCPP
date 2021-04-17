@@ -3,3 +3,5 @@
 //
 
 #include "philosopher.hpp"
+
+sim::Philosopher::Philosopher(int id) : id_(id) {}

@@ -7,12 +7,22 @@
 #ifndef MULTITHREADINGPHILOSOPHERSCPP_PHILOSOPHER_HPP
 #define MULTITHREADINGPHILOSOPHERSCPP_PHILOSOPHER_HPP
 
-namespace simulation {
+#include <memory>
+
+#include "timer.hpp"
+#include "fork.hpp"
+
+namespace sim {
   class Philosopher {
    public:
+    Philosopher(int id);
+
+    utils::Timer timer;
 
    private:
     int id_;
+    std::shared_ptr<sim::Fork> left_fork_;
+    std::shared_ptr<sim::Fork> right_fork_;
   };
 }
 
