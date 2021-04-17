@@ -28,7 +28,7 @@ namespace sim {
       throw Config::ConfigError();
     }
     for (int i = 0; i < nb_of_settings; ++i) {
-      if (!utils::IsNumbers(configuration[i])) {
+      if (!utils::IsDigits(configuration[i])) {
         throw Config::ConfigError();
       }
       (this->*setters_[i])(std::stoi(configuration[i]));

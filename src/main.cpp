@@ -20,9 +20,12 @@ std::mutex starting;
 std::condition_variable alarm_clock;
 bool start = false;
 
-void live(sim::Philosopher &p) {
+void live(const sim::Philosopher &p) {
   std::unique_lock<std::mutex> lg(starting);
+
   while (!start) {alarm_clock.wait(lg);}
+
+  std::cout << "Philo " << p.GetId() << " end" << std::endl;
 }
 
 int main(int argc, char **argv) {
@@ -30,6 +33,12 @@ int main(int argc, char **argv) {
   sim::Config::Instance().Configurate(argc - 1, argv + 1);
   sim::Table table;
 
-  table.Visualize();
+  for (int i = 0; i < table.GetPhilosopherAmount(); ++i) {
+    std::thread(live, std::ref(table.AtPhilolosopher(i))).detach();
+  }
+  std::this_thread::sleep_for(std::chrono::seconds(1));
+  start = true;
+  alarm_clock.notify_all();
+  std::this_thread::sleep_for(std::chrono::seconds(3));
   return 0;
 }

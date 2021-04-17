@@ -6,10 +6,9 @@
 #include <cctype>  // std::isdigit(int c);
 
 namespace utils {
-  bool IsNumbers(const std::string& s) {
+  bool IsDigits(const std::string& s) {
     return !s.empty() && std::find_if(s.begin(), s.end(), [](unsigned char ch) {
       return !std::isdigit(ch);
     }) == s.end();
   }
-
 }

@@ -16,18 +16,33 @@ namespace sim {
   class Philosopher {
    public:
     Philosopher() = default;
-    explicit Philosopher(int id);
+    explicit Philosopher(int id, std::mutex *saying);
 
     // Setters, getters
+    void SetLeftFork(const std::shared_ptr<sim::Fork> &left_fork);
+    const std::shared_ptr<sim::Fork> &GetLeftFork() const;
+
+    void SetRightFork(const std::shared_ptr<sim::Fork> &right_fork);
+    const std::shared_ptr<sim::Fork> &GetRightFork() const;
+
+    void SetSaying(std::mutex *saying);
+
     void SetId(int id);
     int  GetId() const;
+
+    // Actions
+    void Eat();
+
+    // Saying
+    void SayEating();
 
     utils::Timer timer;
 
    private:
-    int id_{};
     std::shared_ptr<sim::Fork> left_fork_;
     std::shared_ptr<sim::Fork> right_fork_;
+    std::mutex *saying_;
+    int id_{};
   };
 }
 

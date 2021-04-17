@@ -16,11 +16,22 @@ namespace sim {
    public:
     Table();
 
+    // Setters, getters
+    [[nodiscard]] int GetPhilosopherAmount() const;
+
+    // Element access:
+    const sim::Philosopher &AtPhilolosopher(int id);
+
+    // Other
     void Visualize();
+
+    // Public fields
+    utils::Timer timer;
+
 
    private:
     std::unique_ptr<sim::Philosopher[]> philosophers_;
-    std::unique_ptr<sim::Fork[]>        forks_;
+    std::mutex saying_;
     int philosopher_amount_;
   };
 }

@@ -10,7 +10,7 @@
 #include <string>
 
 namespace utils {
-  bool IsNumbers(const std::string& s);
+  bool IsDigits(const std::string& s);
 }
 
 #endif //MULTITHREADINGPHILOSOPHERSCPP_UTILS_HPP
