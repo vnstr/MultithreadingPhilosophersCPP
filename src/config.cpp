@@ -8,6 +8,12 @@
 #include "utils.hpp"
 
 namespace simulation {
+  // Singleton ---------------------------------------------------------------
+  Config &Config::Instance() {
+    static Config singleton;
+    return singleton;
+  }
+
   // Initialization static fields
   std::map<int, Config::Setter> Config::setters_ = {
           {0, &Config::SetPhilosophersAmount},

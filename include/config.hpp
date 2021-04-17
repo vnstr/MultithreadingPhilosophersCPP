@@ -12,6 +12,14 @@
 namespace simulation {
   // TODO(gdrive): singleton
   class Config {
+    // Singleton ---------------------------------------------------------------
+   public:
+    static Config &Instance();
+   private:
+    Config() = default;
+    Config(const Config &x) = delete;
+    Config &operator=(const Config &x) = delete;
+
    public:
     // Modifiers ---------------------------------------------------------------
     void Configurate(int nb_of_settings, char **configuration);
