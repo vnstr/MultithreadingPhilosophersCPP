@@ -16,7 +16,9 @@
 #include "config.hpp"
 #include "table.hpp"
 
+utils::Timer timer;
 std::mutex starting;
+std::mutex output_stream;
 std::condition_variable alarm_clock;
 bool start = false;
 
@@ -36,13 +38,14 @@ void live(sim::Philosopher &p) {
 int main(int argc, char **argv) {
   std::cout << "Hello world" << std::endl;
   sim::Config::Instance().Configurate(argc - 1, argv + 1);
-  sim::Table table;
+  sim::Table table(&output_stream);
 
   for (int i = 0; i < table.GetPhilosopherAmount(); ++i) {
     std::thread(live, std::ref(table.AtPhilolosopher(i + 1))).detach();
   }
   std::this_thread::sleep_for(std::chrono::seconds(1));
   start = true;
+  timer.Reset();
   alarm_clock.notify_all();
   std::this_thread::sleep_for(std::chrono::seconds(5));
   return 0;

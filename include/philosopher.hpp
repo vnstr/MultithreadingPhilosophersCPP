@@ -45,7 +45,7 @@ namespace sim {
    private:
     std::shared_ptr<std::mutex> left_fork_;
     std::shared_ptr<std::mutex> right_fork_;
-    std::mutex *saying_;
+    std::mutex *output_mutex_;
     int eating_time_{sim::Config::Instance().GetEatingTime()};
     int sleep_time_{sim::Config::Instance().GetSleepingTime()};
     int id_{};

@@ -10,7 +10,7 @@
 
 namespace sim{
   sim::Philosopher::Philosopher(int id, std::mutex *saying)
-  : id_(id), saying_(saying) {}
+  : id_(id), output_mutex_(saying) {}
 
   // Setters, getters
   void Philosopher::SetLeftFork(const std::shared_ptr<std::mutex> &left_fork) {
@@ -31,7 +31,7 @@ namespace sim{
   }
 
   void Philosopher::SetSaying(std::mutex *saying) {
-    saying_ = saying;
+    output_mutex_ = saying;
   }
 
   void sim::Philosopher::SetId(int id) {
@@ -59,22 +59,22 @@ namespace sim{
 
   // Saying
   void Philosopher::SayEating() const {
-    std::lock_guard<std::mutex> l(*saying_);
+    std::lock_guard<std::mutex> l(*output_mutex_);
     std::cout << id_ << " is eating" << std::endl;
   }
 
   void Philosopher::SaySleeping() const {
-    std::lock_guard<std::mutex> l(*saying_);
+    std::lock_guard<std::mutex> l(*output_mutex_);
     std::cout << id_ << " is sleeping" << std::endl;
   }
 
   void Philosopher::SayThinking() const {
-    std::lock_guard<std::mutex> l(*saying_);
+    std::lock_guard<std::mutex> l(*output_mutex_);
     std::cout << id_ << " is thinking" << std::endl;
   }
 
   void Philosopher::SayTakenFork() const {
-    std::lock_guard<std::mutex> l(*saying_);
+    std::lock_guard<std::mutex> l(*output_mutex_);
     std::cout << id_ << " has taken fork" << std::endl;
   }
 }
