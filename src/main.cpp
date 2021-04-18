@@ -37,7 +37,8 @@ void live(sim::Philosopher &p) {
 
 int main(int argc, char **argv) {
   std::cout << "Hello world" << std::endl;
-  sim::Config::Instance().Configurate(&output_stream, argc - 1, argv + 1);
+  sim::Config::Instance().Configurate(&output_stream, &timer, argc - 1,
+                                      argv + 1);
   sim::Table table;
 
   for (int i = 0; i < table.GetPhilosopherAmount(); ++i) {

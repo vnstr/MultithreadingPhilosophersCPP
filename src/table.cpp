@@ -15,14 +15,12 @@ namespace sim {
 
     philosophers_ = std::make_unique<sim::Philosopher[]>(philosopher_amount_);
     for (int i = 0; i < philosopher_amount_ - 1; ++i) {
-      philosophers_.get()[i].SetSaying(output_mutex_);
       philosophers_.get()[i].SetId(i + 1);
 
       if (i == 0) {
         left_fork = std::make_shared<std::mutex>();
         philosophers_.get()[i].SetLeftFork(left_fork);
         philosophers_.get()[philosopher_amount_ - 1].SetRightFork(left_fork);
-        philosophers_.get()[philosopher_amount_ - 1].SetSaying(output_mutex_);
         philosophers_.get()[philosopher_amount_ - 1].SetId(philosopher_amount_);
 
         right_fork = std::make_shared<std::mutex>();

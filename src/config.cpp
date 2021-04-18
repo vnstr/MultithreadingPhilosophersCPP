@@ -23,12 +23,13 @@ namespace sim {
           {4, &Config::SetNbOfTimesEachShouldEat}};
 
   // Modifiers ---------------------------------------------------------------
-  void Config::Configurate(std::mutex *output_stream, int nb_of_settings,
-                           char **configuration) {
+  void Config::Configurate(std::mutex *output_stream, utils::Timer *timer,
+                           int nb_of_settings, char **configuration) {
     if (nb_of_settings != 4 && nb_of_settings != 5) {
       throw Config::ConfigError();
     }
     output_stream_  = output_stream;
+    timer_ = timer;
     for (int i = 0; i < nb_of_settings; ++i) {
       if (!utils::IsDigits(configuration[i])) {
         throw Config::ConfigError();
@@ -42,8 +43,8 @@ namespace sim {
     output_stream_ = output_stream;
   }
 
-  std::mutex *Config::GetOutputStream() {
-    return output_stream_;
+  void Config::SetTimer(utils::Timer *timer) {
+    timer_ = timer;
   }
 
   void Config::SetPhilosophersAmount(int philosophers_amount) {
@@ -64,6 +65,14 @@ namespace sim {
 
   void Config::SetNbOfTimesEachShouldEat(int nb_of_times_each_should_eat) {
     nb_of_times_each_should_eat_ = nb_of_times_each_should_eat;
+  }
+
+  std::mutex *Config::GetOutputStream() {
+    return output_stream_;
+  }
+
+  utils::Timer *Config::GetTimer() const {
+    return timer_;
   }
 
   int  Config::GetPhilosophersAmount() const {
