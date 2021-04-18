@@ -11,7 +11,6 @@
 
 #include "config.hpp"
 #include "timer.hpp"
-#include "fork.hpp"
 
 namespace sim {
   class Philosopher {
@@ -20,11 +19,11 @@ namespace sim {
     explicit Philosopher(int id, std::mutex *saying);
 
     // Setters, getters
-    void SetLeftFork(const std::shared_ptr<sim::Fork> &left_fork);
-    const std::shared_ptr<sim::Fork> &GetLeftFork() const;
+    void SetLeftFork(const std::shared_ptr<std::mutex> &left_fork);
+    const std::shared_ptr<std::mutex> & GetLeftFork() const;
 
-    void SetRightFork(const std::shared_ptr<sim::Fork> &right_fork);
-    const std::shared_ptr<sim::Fork> &GetRightFork() const;
+    void SetRightFork(const std::shared_ptr<std::mutex> &right_fork);
+    const std::shared_ptr<std::mutex> & GetRightFork() const;
 
     void SetSaying(std::mutex *saying);
 
@@ -40,8 +39,8 @@ namespace sim {
     utils::Timer timer;
 
    private:
-    std::shared_ptr<sim::Fork> left_fork_;
-    std::shared_ptr<sim::Fork> right_fork_;
+    std::shared_ptr<std::mutex> left_fork_;
+    std::shared_ptr<std::mutex> right_fork_;
     std::mutex *saying_;
     int eating_time_{sim::Config::Instance().GetEatingTime()};
     int sleep_time_{sim::Config::Instance().GetSleepingTime()};

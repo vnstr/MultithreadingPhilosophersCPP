@@ -13,19 +13,19 @@ namespace sim{
   : id_(id), saying_(saying) {}
 
   // Setters, getters
-  void Philosopher::SetLeftFork(const std::shared_ptr<sim::Fork> &left_fork) {
+  void Philosopher::SetLeftFork(const std::shared_ptr<std::mutex> &left_fork) {
     left_fork_ = left_fork;
   }
 
-  const std::shared_ptr<sim::Fork> &Philosopher::GetLeftFork() const {
+  const std::shared_ptr<std::mutex> & Philosopher::GetLeftFork() const {
     return left_fork_;
   }
 
-  void Philosopher::SetRightFork(const std::shared_ptr<sim::Fork> &right_fork) {
+  void Philosopher::SetRightFork(const std::shared_ptr<std::mutex> &right_fork) {
     right_fork_ = right_fork;
   }
 
-  const std::shared_ptr<sim::Fork> &Philosopher::GetRightFork() const {
+  const std::shared_ptr<std::mutex> & Philosopher::GetRightFork() const {
     return right_fork_;
   }
 

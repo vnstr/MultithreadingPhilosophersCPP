@@ -11,15 +11,27 @@
 namespace sim {
   Table::Table()
   : philosopher_amount_(Config::Instance().GetPhilosophersAmount()) {
+    std::shared_ptr<std::mutex> left_fork;
+    std::shared_ptr<std::mutex> right_fork;
+
     philosophers_ = std::make_unique<sim::Philosopher[]>(philosopher_amount_);
-    for (int i = 0; i < philosopher_amount_; ++i) {
+    for (int i = 0; i < philosopher_amount_ - 1; ++i) {
       philosophers_.get()[i].SetSaying(&saying_);
       philosophers_.get()[i].SetId(i + 1);
-      philosophers_.get()[i].SetLeftFork(std::make_shared<sim::Fork>(i));
-      if (i + 1 == philosopher_amount_) {
-        philosophers_.get()[i].SetRightFork(std::make_shared<sim::Fork>(0));
+
+      if (i == 0) {
+        left_fork = std::make_shared<std::mutex>();
+        philosophers_.get()[i].SetLeftFork(left_fork);
+        philosophers_.get()[philosopher_amount_ - 1].SetRightFork(left_fork);
+        philosophers_.get()[philosopher_amount_ - 1].SetSaying(&saying_);
+
+        right_fork = std::make_shared<std::mutex>();
+        philosophers_.get()[i].SetRightFork(right_fork);
+        philosophers_.get()[i + 1].SetLeftFork(right_fork);
       } else {
-        philosophers_.get()[i].SetRightFork(std::make_shared<sim::Fork>(i + 1));
+        right_fork = std::make_shared<std::mutex>();
+        philosophers_.get()[i].SetRightFork(right_fork);
+        philosophers_.get()[i + 1].SetLeftFork(right_fork);
       }
     }
   }
@@ -31,18 +43,14 @@ namespace sim {
 
   // Element access:
   sim::Philosopher &Table::AtPhilolosopher(int id) {
-    return philosophers_[id];
+    return philosophers_[id - 1];
   }
 
   // Other
   void Table::Visualize() {
     std::cout << "\x1b[32mPhilosophers ==========\x1b[0m\n";
     for (int i = 0; i < philosopher_amount_; ++i) {
-      std::cout
-      << "id: "             << philosophers_.get()[i].GetId()
-      << " left_fork_id: "  << philosophers_.get()[i].GetLeftFork()->GetId()
-      << " right_fork_id: " << philosophers_.get()[i].GetRightFork()->GetId()
-      << "\n";
+      std::cout << "id: " << philosophers_.get()[i].GetId() << "\n";
     }
     std::cout << "\x1b[32m=======================\x1b[0m" << std::endl;
   }

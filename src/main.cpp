@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
   sim::Table table;
 
   for (int i = 0; i < table.GetPhilosopherAmount(); ++i) {
-    std::thread(live, std::ref(table.AtPhilolosopher(i))).detach();
+    std::thread(live, std::ref(table.AtPhilolosopher(i + 1))).detach();
   }
   std::this_thread::sleep_for(std::chrono::seconds(1));
   start = true;

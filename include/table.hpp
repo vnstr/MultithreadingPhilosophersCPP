@@ -31,7 +31,7 @@ namespace sim {
 
    private:
     std::unique_ptr<sim::Philosopher[]> philosophers_;
-    std::mutex saying_;
+    std::mutex saying_{};
     int philosopher_amount_;
   };
 }
