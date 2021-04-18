@@ -24,11 +24,13 @@ void live(sim::Philosopher &p) {
   std::unique_lock<std::mutex> lg(starting);
 
   while (!start) {alarm_clock.wait(lg);}
-  if (p.GetId() % 2) {
-    std::this_thread::sleep_for(std::chrono::microseconds(50));
-  }
   lg.unlock();
+  if (p.GetId() % 2) {
+    std::this_thread::sleep_for(std::chrono::microseconds(60));
+  }
+  p.SayThinking();
   p.Eat();
+  p.Sleep();
 }
 
 int main(int argc, char **argv) {

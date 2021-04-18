@@ -9,8 +9,7 @@
 #include "config.hpp"
 
 namespace sim {
-  Table::Table()
-  : philosopher_amount_(Config::Instance().GetPhilosophersAmount()) {
+  Table::Table() {
     std::shared_ptr<std::mutex> left_fork;
     std::shared_ptr<std::mutex> right_fork;
 

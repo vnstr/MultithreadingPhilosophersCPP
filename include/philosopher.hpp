@@ -32,9 +32,12 @@ namespace sim {
 
     // Actions
     void Eat();
+    void Sleep() const;
 
     // Saying
     void SayEating() const;
+    void SaySleeping() const;
+    void SayThinking() const;
     void SayTakenFork() const;
 
     utils::Timer timer;

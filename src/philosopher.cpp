@@ -21,7 +21,8 @@ namespace sim{
     return left_fork_;
   }
 
-  void Philosopher::SetRightFork(const std::shared_ptr<std::mutex> &right_fork) {
+  void Philosopher::SetRightFork
+  (const std::shared_ptr<std::mutex> &right_fork) {
     right_fork_ = right_fork;
   }
 
@@ -51,10 +52,25 @@ namespace sim{
     std::this_thread::sleep_for(std::chrono::milliseconds(eating_time_));
   }
 
+  void Philosopher::Sleep() const {
+    this->SaySleeping();
+    std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time_));
+  }
+
   // Saying
   void Philosopher::SayEating() const {
     std::lock_guard<std::mutex> l(*saying_);
     std::cout << id_ << " is eating" << std::endl;
+  }
+
+  void Philosopher::SaySleeping() const {
+    std::lock_guard<std::mutex> l(*saying_);
+    std::cout << id_ << " is sleeping" << std::endl;
+  }
+
+  void Philosopher::SayThinking() const {
+    std::lock_guard<std::mutex> l(*saying_);
+    std::cout << id_ << " is thinking" << std::endl;
   }
 
   void Philosopher::SayTakenFork() const {
