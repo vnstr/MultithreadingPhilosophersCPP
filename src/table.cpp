@@ -30,7 +30,7 @@ namespace sim {
   }
 
   // Element access:
-  const sim::Philosopher &Table::AtPhilolosopher(int id) {
+  sim::Philosopher &Table::AtPhilolosopher(int id) {
     return philosophers_[id];
   }
 

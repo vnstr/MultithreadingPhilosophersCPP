@@ -20,12 +20,12 @@ std::mutex starting;
 std::condition_variable alarm_clock;
 bool start = false;
 
-void live(const sim::Philosopher &p) {
+void live(sim::Philosopher &p) {
   std::unique_lock<std::mutex> lg(starting);
 
   while (!start) {alarm_clock.wait(lg);}
-
-  std::cout << "Philo " << p.GetId() << " end" << std::endl;
+  lg.unlock();
+  p.Eat();
 }
 
 int main(int argc, char **argv) {

@@ -9,6 +9,7 @@
 
 #include <memory>
 
+#include "config.hpp"
 #include "timer.hpp"
 #include "fork.hpp"
 
@@ -34,7 +35,7 @@ namespace sim {
     void Eat();
 
     // Saying
-    void SayEating();
+    void SayEating() const;
 
     utils::Timer timer;
 
@@ -42,6 +43,8 @@ namespace sim {
     std::shared_ptr<sim::Fork> left_fork_;
     std::shared_ptr<sim::Fork> right_fork_;
     std::mutex *saying_;
+    int eating_time_{sim::Config::Instance().GetEatingTime()};
+    int sleep_time_{sim::Config::Instance().GetSleepingTime()};
     int id_{};
   };
 }

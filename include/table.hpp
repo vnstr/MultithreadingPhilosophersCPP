@@ -20,7 +20,7 @@ namespace sim {
     [[nodiscard]] int GetPhilosopherAmount() const;
 
     // Element access:
-    const sim::Philosopher &AtPhilolosopher(int id);
+    sim::Philosopher &AtPhilolosopher(int id);
 
     // Other
     void Visualize();

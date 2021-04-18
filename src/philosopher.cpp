@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <thread>
+#include <chrono>
 
 #include "philosopher.hpp"
 
@@ -41,12 +43,13 @@ namespace sim{
 
   // Actions
   void Philosopher::Eat() {
-
+    this->SayEating();
+    std::this_thread::sleep_for(std::chrono::milliseconds(eating_time_));
   }
 
   // Saying
-  void Philosopher::SayEating() {
-    std::lock_guard<std::mutex>(*saying_);
+  void Philosopher::SayEating() const {
+    std::lock_guard<std::mutex> l(*saying_);
     std::cout << id_ << " is eating" << std::endl;
   }
 }
