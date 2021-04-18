@@ -14,8 +14,7 @@
 namespace sim {
   class Table {
    public:
-    Table() = delete;
-    Table(std::mutex *output_mutex);
+    Table();
 
     // Setters, getters
     [[nodiscard]] int GetPhilosopherAmount() const;
@@ -32,7 +31,7 @@ namespace sim {
 
    private:
     std::unique_ptr<sim::Philosopher[]> philosophers_;
-    std::mutex *output_mutex_;
+    std::mutex *output_mutex_{Config::Instance().GetOutputStream()};
     int philosopher_amount_{Config::Instance().GetPhilosophersAmount()};
   };
 }

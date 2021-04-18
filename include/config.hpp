@@ -8,9 +8,9 @@
 #define MULTITHREADINGPHILOSOPHERSCPP_CONFIG_HPP
 
 # include <map>
+# include <mutex>
 
 namespace sim {
-  // TODO(gdrive): singleton
   class Config {
     // Singleton ---------------------------------------------------------------
    public:
@@ -22,18 +22,24 @@ namespace sim {
 
    public:
     // Modifiers ---------------------------------------------------------------
-    void Configurate(int nb_of_settings, char **configuration);
+    void Configurate(std::mutex *output_stream, int nb_of_settings,
+                     char **configuration);
 
     // Setters, Getters --------------------------------------------------------
+    void SetOutputStream(std::mutex *output_stream);
     void SetPhilosophersAmount(int philosophers_amount);
     void SetLifetime(int lifetime);
     void SetEatingTime(int eating_time);
     void SetSleepingTime(int sleeping_time);
     void SetNbOfTimesEachShouldEat(int nb_of_times_each_should_eat);
-    int  GetPhilosophersAmount() const;
-    int  GetLifetime() const;
-    int  GetEatingTime() const;
-    int  GetSleepingTime() const;
+
+    std::mutex *GetOutputStream();
+    int        GetPhilosophersAmount() const;
+    int        GetLifetime() const;
+    int        GetEatingTime() const;
+    int        GetSleepingTime() const;
+
+
     int  GetNbOfTimesEachShouldEat() const;
 
     // Exception  --------------------------------------------------------------
@@ -42,6 +48,7 @@ namespace sim {
     };
    private:
     // Config fields
+    std::mutex *output_stream_;
     int philosophers_amount_;
     int lifetime_;
     int eating_time_;

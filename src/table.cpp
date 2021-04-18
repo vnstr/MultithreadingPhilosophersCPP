@@ -9,7 +9,7 @@
 #include "config.hpp"
 
 namespace sim {
-  Table::Table(std::mutex *output_mutex) : output_mutex_(output_mutex) {
+  Table::Table() {
     std::shared_ptr<std::mutex> left_fork;
     std::shared_ptr<std::mutex> right_fork;
 
