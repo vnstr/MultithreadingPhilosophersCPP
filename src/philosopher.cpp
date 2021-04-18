@@ -43,6 +43,10 @@ namespace sim{
 
   // Actions
   void Philosopher::Eat() {
+    std::lock_guard<std::mutex> l_fork(*left_fork_.get());
+    this->SayTakenFork();
+    std::lock_guard<std::mutex> r_fork(*right_fork_.get());
+    this->SayTakenFork();
     this->SayEating();
     std::this_thread::sleep_for(std::chrono::milliseconds(eating_time_));
   }
@@ -51,5 +55,10 @@ namespace sim{
   void Philosopher::SayEating() const {
     std::lock_guard<std::mutex> l(*saying_);
     std::cout << id_ << " is eating" << std::endl;
+  }
+
+  void Philosopher::SayTakenFork() const {
+    std::lock_guard<std::mutex> l(*saying_);
+    std::cout << id_ << " has taken fork" << std::endl;
   }
 }

@@ -24,6 +24,9 @@ void live(sim::Philosopher &p) {
   std::unique_lock<std::mutex> lg(starting);
 
   while (!start) {alarm_clock.wait(lg);}
+  if (p.GetId() % 2) {
+    std::this_thread::sleep_for(std::chrono::microseconds(50));
+  }
   lg.unlock();
   p.Eat();
 }
@@ -39,6 +42,6 @@ int main(int argc, char **argv) {
   std::this_thread::sleep_for(std::chrono::seconds(1));
   start = true;
   alarm_clock.notify_all();
-  std::this_thread::sleep_for(std::chrono::seconds(3));
+  std::this_thread::sleep_for(std::chrono::seconds(5));
   return 0;
 }

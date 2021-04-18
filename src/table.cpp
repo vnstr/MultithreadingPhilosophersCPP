@@ -24,6 +24,7 @@ namespace sim {
         philosophers_.get()[i].SetLeftFork(left_fork);
         philosophers_.get()[philosopher_amount_ - 1].SetRightFork(left_fork);
         philosophers_.get()[philosopher_amount_ - 1].SetSaying(&saying_);
+        philosophers_.get()[philosopher_amount_ - 1].SetId(philosopher_amount_);
 
         right_fork = std::make_shared<std::mutex>();
         philosophers_.get()[i].SetRightFork(right_fork);

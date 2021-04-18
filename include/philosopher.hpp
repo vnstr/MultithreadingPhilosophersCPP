@@ -35,6 +35,7 @@ namespace sim {
 
     // Saying
     void SayEating() const;
+    void SayTakenFork() const;
 
     utils::Timer timer;
 
