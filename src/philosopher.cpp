@@ -57,25 +57,25 @@ namespace sim{
   void Philosopher::SayIEat() const {
     std::lock_guard<std::mutex> l(*output_stream_);
     std::cout << simulation_timer_->MsElapsed() << " ";
-    std::cout << id_ << " is eating" << std::endl;
+    std::cout << id_ << "\x1b[32m is eating\x1b[0m" << std::endl;
   }
 
   void Philosopher::SayISleep() const {
     std::lock_guard<std::mutex> l(*output_stream_);
     std::cout << simulation_timer_->MsElapsed() << " ";
-    std::cout << id_ << " is sleeping" << std::endl;
+    std::cout <<  id_ << "\x1b[34m is sleeping\x1b[0m" << std::endl;
   }
 
   void Philosopher::SayIThink() const {
     std::lock_guard<std::mutex> l(*output_stream_);
     std::cout << simulation_timer_->MsElapsed() << " ";
-    std::cout << id_ << " is thinking" << std::endl;
+    std::cout << id_ << "\x1b[33m is thinking\x1b[0m" << std::endl;
   }
 
   void Philosopher::SayIDead() const {
     std::lock_guard<std::mutex> l(*output_stream_);
     std::cout << simulation_timer_->MsElapsed() << " ";
-    std::cout << id_ << " is dead" << std::endl;
+    std::cout << id_ << "\x1b[31m is dead\x1b[0m" << std::endl;
   }
 
   void Philosopher::SayTakenFork() const {
