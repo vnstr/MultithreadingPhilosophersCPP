@@ -9,7 +9,7 @@
     ./simulation nb_of_philos lifetime eating_time sleppint_time [nb_of_times_each_philo_must_eat]
 
 ## Output format
-    timestamp_in_ms X [action]
+    timestamp_in_ms [philo_id] [action]
 
 ## Life cycle: sleep, thinking, meal.
 
