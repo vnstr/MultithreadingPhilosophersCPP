@@ -41,7 +41,7 @@ namespace sim {
     void SayIDead() const;
     void SayTakenFork() const;
 
-    utils::Timer timer_;
+    std::atomic<utils::Timer> timer_{utils::Timer()};
 
    private:
     std::shared_ptr<std::mutex> left_fork_;

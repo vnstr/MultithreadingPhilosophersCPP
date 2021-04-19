@@ -26,7 +26,7 @@ void check_philosophers(const sim::Table &table) {
   int id = 1;
 
   while (true) {
-    if (table.AtPhilolosopher(id).timer_.MsElapsed() >= sim::Config::Instance().GetLifetime()) {
+    if (table.AtPhilolosopher(id).timer_.load().MsElapsed() >= sim::Config::Instance().GetLifetime()) {
       table.AtPhilolosopher(id).SayIDead();
       output_stream.lock();
       return;

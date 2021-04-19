@@ -47,7 +47,7 @@ namespace sim{
     std::lock_guard<std::mutex> l_fork(*left_fork_.get());
     this->SayTakenFork();
     std::lock_guard<std::mutex> r_fork(*right_fork_.get());
-    timer_.Reset();
+    timer_.load().Reset();
     this->SayTakenFork();
     this->SayIEat();
     std::this_thread::sleep_for(std::chrono::milliseconds(eating_time_));
