@@ -14,6 +14,7 @@
 # include "philosopher.hpp"
 
 namespace sim {
+  // TODO(gdrive): exception for empty config
   class Table {
    public:
     Table();
@@ -23,13 +24,13 @@ namespace sim {
 
     // Element access:
     sim::Philosopher &AtPhilolosopher(int id);
+    const sim::Philosopher &AtPhilolosopher(int id) const;
 
     // Other
     void Visualize();
 
     // Public fields
     utils::Timer timer;
-
 
    private:
     std::unique_ptr<sim::Philosopher[]> philosophers_;

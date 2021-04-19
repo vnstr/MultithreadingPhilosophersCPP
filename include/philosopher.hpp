@@ -35,12 +35,13 @@ namespace sim {
     void Sleep() const;
 
     // Saying
-    void SayEating() const;
-    void SaySleeping() const;
-    void SayThinking() const;
+    void SayIEat() const;
+    void SayISleep() const;
+    void SayIThink() const;
+    void SayIDead() const;
     void SayTakenFork() const;
 
-    utils::Timer timer;
+    utils::Timer timer_;
 
    private:
     std::shared_ptr<std::mutex> left_fork_;

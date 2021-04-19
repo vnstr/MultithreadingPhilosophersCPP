@@ -44,6 +44,10 @@ namespace sim {
     return philosophers_[id - 1];
   }
 
+  const sim::Philosopher &Table::AtPhilolosopher(int id) const {
+    return philosophers_[id - 1];
+  }
+
   // Other
   void Table::Visualize() {
     std::cout << "\x1b[32mPhilosophers ==========\x1b[0m\n";
