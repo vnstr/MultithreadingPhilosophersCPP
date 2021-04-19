@@ -16,18 +16,23 @@
 #include "config.hpp"
 #include "table.hpp"
 
-std::atomic<utils::Timer> timer{utils::Timer()};
+utils::Timer timer;
 std::mutex starting;
 std::mutex output_stream;
 std::condition_variable alarm_clock;
 bool start = false;
 
-void check_philosophers(const sim::Table &table) {
+bool is_dead(sim::Philosopher &p) {
+  return p.timer_.MsElapsed() >= sim::Config::Instance().GetLifetime() + 5;
+}
+
+void check_philosophers(sim::Table &table) {
   int id = 1;
 
   while (true) {
-    if (table.AtPhilolosopher(id).timer_.load().MsElapsed() >= sim::Config::Instance().GetLifetime()) {
+    if (is_dead(table.AtPhilolosopher(id))) {
       table.AtPhilolosopher(id).SayIDead();
+      std::cerr << table.AtPhilolosopher(id).timer_.MsElapsed() << std::endl;
       output_stream.lock();
       return;
     }
@@ -38,15 +43,15 @@ void check_philosophers(const sim::Table &table) {
   }
 }
 
-void live(sim::Philosopher &p) {
+[[noreturn]] void live(sim::Philosopher &p) {
   std::unique_lock<std::mutex> preparation(starting);
 
   while (!start) {alarm_clock.wait(preparation);}
   preparation.unlock();
-  if (p.GetId() % 2) {
+  if (p.GetId() % 2 == 0) {
     std::this_thread::sleep_for(std::chrono::microseconds(60));
   }
-  p.timer_.load().Reset();
+  p.timer_.Reset();
   while (true) {
     p.SayIThink();
     p.Eat();
@@ -55,7 +60,6 @@ void live(sim::Philosopher &p) {
 }
 
 int main(int argc, char **argv) {
-  std::cout << "Hello world" << std::endl;
   sim::Config::Instance().Configurate(&output_stream, &timer, argc - 1,
                                       argv + 1);
   sim::Table table;
@@ -65,7 +69,7 @@ int main(int argc, char **argv) {
   }
   std::this_thread::sleep_for(std::chrono::milliseconds (100));
   start = true;
-  timer.load().Reset();
+  timer.Reset();
   alarm_clock.notify_all();
   check_philosophers(table);
   std::this_thread::sleep_for(std::chrono::seconds(1));
