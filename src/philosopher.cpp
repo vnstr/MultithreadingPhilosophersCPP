@@ -61,31 +61,31 @@ namespace sim{
   // Saying
   void Philosopher::SayIEat() const {
     std::lock_guard<std::mutex> l(*output_stream_);
-    std::cout << simulation_timer_->MsElapsed() << " ";
+    std::cout << simulation_timer_->load().MsElapsed() << " ";
     std::cout << id_ << " is eating" << std::endl;
   }
 
   void Philosopher::SayISleep() const {
     std::lock_guard<std::mutex> l(*output_stream_);
-    std::cout << simulation_timer_->MsElapsed() << " ";
+    std::cout << simulation_timer_->load().MsElapsed() << " ";
     std::cout << id_ << " is sleeping" << std::endl;
   }
 
   void Philosopher::SayIThink() const {
     std::lock_guard<std::mutex> l(*output_stream_);
-    std::cout << simulation_timer_->MsElapsed() << " ";
+    std::cout << simulation_timer_->load().MsElapsed() << " ";
     std::cout << id_ << " is thinking" << std::endl;
   }
 
   void Philosopher::SayIDead() const {
     std::lock_guard<std::mutex> l(*output_stream_);
-    std::cout << simulation_timer_->MsElapsed() << " ";
+    std::cout << simulation_timer_->load().MsElapsed() << " ";
     std::cout << id_ << " is dead" << std::endl;
   }
 
   void Philosopher::SayTakenFork() const {
     std::lock_guard<std::mutex> l(*output_stream_);
-    std::cout << simulation_timer_->MsElapsed() << " ";
+    std::cout << simulation_timer_->load().MsElapsed() << " ";
     std::cout << id_ << " has taken fork" << std::endl;
   }
 }

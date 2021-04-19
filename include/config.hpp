@@ -24,27 +24,30 @@ namespace sim {
 
    public:
     // Modifiers ---------------------------------------------------------------
-    void Configurate(std::mutex *output_stream, utils::Timer *timer,
-                     int nb_of_settings, char **configuration);
+    void Configurate(std::mutex *output_stream,
+                     std::atomic<utils::Timer> *timer,
+                     int nb_of_settings,
+                     char **configuration);
 
     // Setters, Getters --------------------------------------------------------
     void SetOutputStream(std::mutex *output_stream);
-    void SetTimer(utils::Timer *timer);
+    void SetTimer(std::atomic<utils::Timer> *timer);
     void SetPhilosophersAmount(int philosophers_amount);
     void SetLifetime(int lifetime);
     void SetEatingTime(int eating_time);
     void SetSleepingTime(int sleeping_time);
     void SetNbOfTimesEachShouldEat(int nb_of_times_each_should_eat);
 
-    std::mutex *GetOutputStream();
-    int        GetPhilosophersAmount() const;
-    int        GetLifetime() const;
-    int        GetEatingTime() const;
-    int        GetSleepingTime() const;
-    int        GetNbOfTimesEachShouldEat() const;
+    std::mutex   *GetOutputStream();
+    int          GetPhilosophersAmount() const;
+    int          GetLifetime() const;
+    int          GetEatingTime() const;
+    int          GetSleepingTime() const;
+    int          GetNbOfTimesEachShouldEat() const;
+    std::atomic<utils::Timer> *GetTimer() const;
 
-
-    utils::Timer *GetTimer() const;
+    // Other -------------------------------------------------------------------
+    void Visualize() const;
 
     // Exception  --------------------------------------------------------------
     class ConfigError {
@@ -53,7 +56,7 @@ namespace sim {
    private:
     // Config fields
     std::mutex *output_stream_;
-    utils::Timer *timer_;
+    std::atomic<utils::Timer> *timer_;
     int philosophers_amount_;
     int lifetime_;
     int eating_time_;

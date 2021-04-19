@@ -2,6 +2,7 @@
 // Created by Gueren Drive on 4/17/21.
 //
 
+#include <iostream>
 #include <string>
 
 #include "config.hpp"
@@ -23,7 +24,8 @@ namespace sim {
           {4, &Config::SetNbOfTimesEachShouldEat}};
 
   // Modifiers ---------------------------------------------------------------
-  void Config::Configurate(std::mutex *output_stream, utils::Timer *timer,
+  void Config::Configurate(std::mutex *output_stream,
+                           std::atomic<utils::Timer> *timer,
                            int nb_of_settings, char **configuration) {
     if (nb_of_settings != 4 && nb_of_settings != 5) {
       throw Config::ConfigError();
@@ -43,7 +45,7 @@ namespace sim {
     output_stream_ = output_stream;
   }
 
-  void Config::SetTimer(utils::Timer *timer) {
+  void Config::SetTimer(std::atomic<utils::Timer> *timer) {
     timer_ = timer;
   }
 
@@ -71,7 +73,7 @@ namespace sim {
     return output_stream_;
   }
 
-  utils::Timer *Config::GetTimer() const {
+  std::atomic<utils::Timer> *Config::GetTimer() const {
     return timer_;
   }
 
@@ -93,6 +95,16 @@ namespace sim {
 
   int  Config::GetNbOfTimesEachShouldEat() const {
     return nb_of_times_each_should_eat_;
+  }
+
+  // Other -------------------------------------------------------------------
+  void Config::Visualize() const {
+    std::cout
+    << "amount        = " << philosophers_amount_ << "\n"
+    << "lifetime      = " << lifetime_            << "\n"
+    << "eating_time   = " << eating_time_         << "\n"
+    << "sleeping_time = " << sleeping_time_       << "\n"
+    << std::endl;
   }
 
   // Exception  --------------------------------------------------------------

@@ -47,7 +47,7 @@ namespace sim {
     std::shared_ptr<std::mutex> left_fork_;
     std::shared_ptr<std::mutex> right_fork_;
     std::mutex *output_stream_{sim::Config::Instance().GetOutputStream()};
-    utils::Timer *simulation_timer_{sim::Config::Instance().GetTimer()};
+    std::atomic<utils::Timer> *simulation_timer_{sim::Config::Instance().GetTimer()};
     int eating_time_{sim::Config::Instance().GetEatingTime()};
     int sleep_time_{sim::Config::Instance().GetSleepingTime()};
     int id_{};

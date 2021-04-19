@@ -16,7 +16,7 @@
 #include "config.hpp"
 #include "table.hpp"
 
-utils::Timer timer;
+std::atomic<utils::Timer> timer{utils::Timer()};
 std::mutex starting;
 std::mutex output_stream;
 std::condition_variable alarm_clock;
@@ -46,6 +46,7 @@ void live(sim::Philosopher &p) {
   if (p.GetId() % 2) {
     std::this_thread::sleep_for(std::chrono::microseconds(60));
   }
+  p.timer_.load().Reset();
   while (true) {
     p.SayIThink();
     p.Eat();
@@ -64,7 +65,7 @@ int main(int argc, char **argv) {
   }
   std::this_thread::sleep_for(std::chrono::milliseconds (100));
   start = true;
-  timer.Reset();
+  timer.load().Reset();
   alarm_clock.notify_all();
   check_philosophers(table);
   std::this_thread::sleep_for(std::chrono::seconds(1));
