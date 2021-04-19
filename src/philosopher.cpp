@@ -25,6 +25,11 @@ namespace sim{
     id_ = id;
   }
 
+  void Philosopher::SetNbOfTimesEachEat(
+          std::atomic<int> *nb_of_times_each_eat) {
+    nb_of_times_each_eat_ = nb_of_times_each_eat;
+  }
+
   int Philosopher::GetId() const {
     return id_;
   }
@@ -37,6 +42,9 @@ namespace sim{
     timer_.Reset();
     this->SayTakenFork();
     this->SayIEat();
+    if (nb_of_times_each_eat_) {
+      ++(*nb_of_times_each_eat_);
+    }
     std::this_thread::sleep_for(std::chrono::milliseconds(eating_time_));
   }
 

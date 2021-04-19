@@ -21,6 +21,7 @@ namespace sim {
     // Setters, getters
     void SetLeftFork(const std::shared_ptr<std::mutex> &left_fork);
     void SetRightFork(const std::shared_ptr<std::mutex> &right_fork);
+    void SetNbOfTimesEachEat(std::atomic<int> *nb_of_times_each_eat);
     void SetId(int id);
 
     int  GetId() const;
@@ -39,10 +40,11 @@ namespace sim {
     utils::Timer timer_;
 
    private:
-    std::shared_ptr<std::mutex> left_fork_;
-    std::shared_ptr<std::mutex> right_fork_;
+    std::shared_ptr<std::mutex> left_fork_{nullptr};
+    std::shared_ptr<std::mutex> right_fork_{nullptr};
     std::mutex *output_stream_{sim::Config::Instance().GetOutputStream()};
     utils::Timer *simulation_timer_{sim::Config::Instance().GetTimer()};
+    std::atomic<int> *nb_of_times_each_eat_{nullptr};
     int eating_time_{sim::Config::Instance().GetEatingTime()};
     int sleep_time_{sim::Config::Instance().GetSleepingTime()};
     int id_{};

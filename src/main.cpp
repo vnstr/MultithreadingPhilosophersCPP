@@ -18,12 +18,22 @@ bool is_dead(sim::Philosopher &p) {
   return p.timer_.MsElapsed() >= sim::Config::Instance().GetLifetime() + 5;
 }
 
+bool EveryoneAte(const sim::Table &t) {
+  return t.HowManyPhilosophersHaveEaten() >=
+         sim::Config::Instance().GetNbOfTimesEachShouldEat();
+}
+
 void check_philosophers(sim::Table &table) {
   int id = 1;
 
   while (true) {
     if (is_dead(table.AtPhilolosopher(id))) {
       table.AtPhilolosopher(id).SayIDead();
+      output_stream.lock();
+      return;
+    }
+    if (sim::Config::Instance().GetNbOfTimesEachShouldEat() &&
+        EveryoneAte(table)) {
       output_stream.lock();
       return;
     }

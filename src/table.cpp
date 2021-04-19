@@ -18,21 +18,28 @@ namespace sim {
 
     philosophers_ = std::make_unique<sim::Philosopher[]>(philosopher_amount_);
     for (int i = 0; i < philosopher_amount_ - 1; ++i) {
-      philosophers_.get()[i].SetId(i + 1);
+      philosophers_[i].SetId(i + 1);
+      if (Config::Instance().GetNbOfTimesEachShouldEat()) {
+        philosophers_[i].SetNbOfTimesEachEat(&nb_of_times_each_eat_);
+      }
 
       if (i == 0) {
         left_fork = std::make_shared<std::mutex>();
-        philosophers_.get()[i].SetLeftFork(left_fork);
-        philosophers_.get()[philosopher_amount_ - 1].SetRightFork(left_fork);
-        philosophers_.get()[philosopher_amount_ - 1].SetId(philosopher_amount_);
+        philosophers_[i].SetLeftFork(left_fork);
+        philosophers_[philosopher_amount_ - 1].SetRightFork(left_fork);
+        philosophers_[philosopher_amount_ - 1].SetId(philosopher_amount_);
+        if (Config::Instance().GetNbOfTimesEachShouldEat()) {
+          philosophers_[philosopher_amount_ - 1].SetNbOfTimesEachEat(
+                                                        &nb_of_times_each_eat_);
+        }
 
         right_fork = std::make_shared<std::mutex>();
-        philosophers_.get()[i].SetRightFork(right_fork);
-        philosophers_.get()[i + 1].SetLeftFork(right_fork);
+        philosophers_[i].SetRightFork(right_fork);
+        philosophers_[i + 1].SetLeftFork(right_fork);
       } else {
         right_fork = std::make_shared<std::mutex>();
-        philosophers_.get()[i].SetRightFork(right_fork);
-        philosophers_.get()[i + 1].SetLeftFork(right_fork);
+        philosophers_[i].SetRightFork(right_fork);
+        philosophers_[i + 1].SetLeftFork(right_fork);
       }
     }
   }
@@ -49,5 +56,9 @@ namespace sim {
 
   const sim::Philosopher &Table::AtPhilolosopher(int id) const {
     return philosophers_[id - 1];
+  }
+
+  int Table::HowManyPhilosophersHaveEaten() const {
+    return nb_of_times_each_eat_.load();
   }
 }

@@ -14,7 +14,7 @@
 #include "philosopher.hpp"
 
 namespace sim {
-  // TODO(gdrive): exception for empty config
+  // TODO(gdrive): atomic nb_of_each_eated
   class Table {
    public:
     Table();
@@ -23,8 +23,9 @@ namespace sim {
     [[nodiscard]] int GetPhilosopherAmount() const;
 
     // Element access:
-    sim::Philosopher &AtPhilolosopher(int id);
+    sim::Philosopher       &AtPhilolosopher(int id);
     const sim::Philosopher &AtPhilolosopher(int id) const;
+    int                    HowManyPhilosophersHaveEaten() const;
 
     // Other
     void Visualize();
@@ -34,6 +35,7 @@ namespace sim {
 
    private:
     std::unique_ptr<sim::Philosopher[]> philosophers_;
+    std::atomic<int> nb_of_times_each_eat_{0};
     int philosopher_amount_{Config::Instance().GetPhilosophersAmount()};
   };
 }
