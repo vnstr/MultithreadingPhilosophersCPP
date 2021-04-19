@@ -5,8 +5,8 @@ They sit at the table to the right and left of each fork with which they eat the
 ![Alt text](/images/philosophers.png?raw=true "Optional Title")
 
 ## Building and running the project
-###Use cmake for building.
-###./simulation nb_of_philos lifetime eating_time sleppint_time [nb_of_times_each_philo_must_eat]
+    #Use cmake for building.
+    #./simulation nb_of_philos lifetime eating_time sleppint_time [nb_of_times_each_philo_must_eat]
 
 # Life cycle: sleep, thinking, meal.
 
