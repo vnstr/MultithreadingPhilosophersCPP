@@ -1,6 +1,6 @@
 # MultithreadingPhilosophersCPP
-This is the simulation that philosophers (threads) live in.
-They sit at the table to the right and left of each fork with which they eat the dish.
+    This is the simulation that philosophers (threads) live in.
+    They sit at the table to the right and left of each fork with which they eat the dish.
 
 ![Alt text](/images/philosophers.png?raw=true "Optional Title")
 
@@ -8,6 +8,9 @@ They sit at the table to the right and left of each fork with which they eat the
     Use cmake for building.
     ./simulation nb_of_philos lifetime eating_time sleppint_time [nb_of_times_each_philo_must_eat]
 
-# Life cycle: sleep, thinking, meal.
+## Output format
+    timestamp_in_ms X [action]
+
+## Life cycle: sleep, thinking, meal.
 
 ![Alt text](/images/screen_shot_of_sim.png?raw=true "Optional Title")
