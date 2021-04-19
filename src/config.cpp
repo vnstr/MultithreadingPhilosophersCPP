@@ -101,7 +101,7 @@ namespace sim {
   }
 
   // Exception  --------------------------------------------------------------
-  const char* Config::ConfigError::what() const noexcept {
+  [[maybe_unused]] const char* Config::ConfigError::what() const noexcept {
     return "bad configuration";
   }
 }

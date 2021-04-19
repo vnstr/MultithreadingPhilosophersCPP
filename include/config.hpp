@@ -16,11 +16,11 @@ namespace sim {
   class Config {
     // Singleton ---------------------------------------------------------------
    public:
+    Config(const Config &x) = delete;
+    Config &operator=(const Config &x) = delete;
     static Config &Instance();
    private:
     Config() = default;
-    Config(const Config &x) = delete;
-    Config &operator=(const Config &x) = delete;
 
    public:
     // Modifiers ---------------------------------------------------------------
@@ -36,19 +36,19 @@ namespace sim {
     void SetSleepingTime(int sleeping_time);
     void SetNbOfTimesEachShouldEat(int nb_of_times_each_should_eat);
 
-    std::mutex *GetOutputStream();
-    int        GetPhilosophersAmount() const;
-    int        GetLifetime() const;
-    int        GetEatingTime() const;
-    int        GetSleepingTime() const;
-    int        GetNbOfTimesEachShouldEat() const;
+    std::mutex        *GetOutputStream();
+    [[nodiscard]] int GetPhilosophersAmount() const;
+    [[nodiscard]] int GetLifetime() const;
+    [[nodiscard]] int GetEatingTime() const;
+    [[nodiscard]] int GetSleepingTime() const;
+    [[nodiscard]] int GetNbOfTimesEachShouldEat() const;
 
 
-    utils::Timer *GetTimer() const;
+    [[nodiscard]] utils::Timer *GetTimer() const;
 
     // Exception  --------------------------------------------------------------
     class ConfigError {
-      virtual const char* what() const noexcept;
+      [[maybe_unused]] virtual const char* what() const noexcept;
     };
    private:
     // Config fields

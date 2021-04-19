@@ -44,9 +44,9 @@ namespace sim{
 
   // Actions
   void Philosopher::Eat() {
-    std::lock_guard<std::mutex> l_fork(*left_fork_.get());
+    std::lock_guard<std::mutex> l_fork(*left_fork_);
     this->SayTakenFork();
-    std::lock_guard<std::mutex> r_fork(*right_fork_.get());
+    std::lock_guard<std::mutex> r_fork(*right_fork_);
     timer_.Reset();
     this->SayTakenFork();
     this->SayIEat();

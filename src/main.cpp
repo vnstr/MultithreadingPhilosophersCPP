@@ -4,12 +4,11 @@
 
 // condition_variable::notify_one
 #include <thread>              // std::thread
-#include <condition_variable>  // std::condition_variable
+  // std::condition_variable
 //#include <mutex>             // std::mutex, std::unique_lock
 #include <chrono>
 //#include <future>
 
-#include <unistd.h>
 
 #include <iostream>
 
