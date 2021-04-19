@@ -7,11 +7,11 @@
 #ifndef MULTITHREADINGPHILOSOPHERSCPP_TABLE_HPP
 #define MULTITHREADINGPHILOSOPHERSCPP_TABLE_HPP
 
-# include <memory>
-# include <mutex>
+#include <memory>
+#include <mutex>
 
-# include "timer.hpp"
-# include "philosopher.hpp"
+#include "timer.hpp"
+#include "philosopher.hpp"
 
 namespace sim {
   // TODO(gdrive): exception for empty config
@@ -34,8 +34,6 @@ namespace sim {
 
    private:
     std::unique_ptr<sim::Philosopher[]> philosophers_;
-    std::mutex *output_mutex_{Config::Instance().GetOutputStream()};
-    utils::Timer *timer_{};
     int philosopher_amount_{Config::Instance().GetPhilosophersAmount()};
   };
 }

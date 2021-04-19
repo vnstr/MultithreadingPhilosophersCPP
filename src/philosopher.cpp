@@ -9,29 +9,16 @@
 #include "philosopher.hpp"
 
 namespace sim{
-  sim::Philosopher::Philosopher(int id, std::mutex *saying)
-  : id_(id), output_stream_(saying) {}
+  sim::Philosopher::Philosopher(int id) : id_(id) {}
 
   // Setters, getters
   void Philosopher::SetLeftFork(const std::shared_ptr<std::mutex> &left_fork) {
     left_fork_ = left_fork;
   }
 
-  const std::shared_ptr<std::mutex> & Philosopher::GetLeftFork() const {
-    return left_fork_;
-  }
-
   void Philosopher::SetRightFork
   (const std::shared_ptr<std::mutex> &right_fork) {
     right_fork_ = right_fork;
-  }
-
-  const std::shared_ptr<std::mutex> & Philosopher::GetRightFork() const {
-    return right_fork_;
-  }
-
-  void Philosopher::SetSaying(std::mutex *saying) {
-    output_stream_ = saying;
   }
 
   void sim::Philosopher::SetId(int id) {

@@ -10,6 +10,9 @@
 
 namespace sim {
   Table::Table() {
+    if (!sim::Config::Instance().IsFull()) {
+      throw sim::Config::ConfigError();
+    }
     std::shared_ptr<std::mutex> left_fork;
     std::shared_ptr<std::mutex> right_fork;
 

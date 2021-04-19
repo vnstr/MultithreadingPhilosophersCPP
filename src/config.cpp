@@ -43,6 +43,12 @@ namespace sim {
     }
   }
 
+  // Size --------------------------------------------------------------------
+  bool Config::IsFull() const {
+    return output_stream_ && timer_ && philosophers_amount_ && lifetime_ &&
+           eating_time_ && sleeping_time_;
+  }
+
   // Setters, Getters --------------------------------------------------------
   void Config::SetOutputStream(std::mutex *output_stream) {
     output_stream_ = output_stream;

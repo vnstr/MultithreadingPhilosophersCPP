@@ -27,6 +27,9 @@ namespace sim {
     void Configurate(std::mutex *output_stream, utils::Timer *timer,
                      int nb_of_settings, char **configuration);
 
+    // Size --------------------------------------------------------------------
+    bool IsFull() const;
+
     // Setters, Getters --------------------------------------------------------
     void SetOutputStream(std::mutex *output_stream);
     void SetTimer(utils::Timer *timer);
@@ -36,14 +39,12 @@ namespace sim {
     void SetSleepingTime(int sleeping_time);
     void SetNbOfTimesEachShouldEat(int nb_of_times_each_should_eat);
 
-    std::mutex        *GetOutputStream();
-    [[nodiscard]] int GetPhilosophersAmount() const;
-    [[nodiscard]] int GetLifetime() const;
-    [[nodiscard]] int GetEatingTime() const;
-    [[nodiscard]] int GetSleepingTime() const;
-    [[nodiscard]] int GetNbOfTimesEachShouldEat() const;
-
-
+    std::mutex                 *GetOutputStream();
+    [[nodiscard]] int          GetPhilosophersAmount() const;
+    [[nodiscard]] int          GetLifetime() const;
+    [[nodiscard]] int          GetEatingTime() const;
+    [[nodiscard]] int          GetSleepingTime() const;
+    [[nodiscard]] int          GetNbOfTimesEachShouldEat() const;
     [[nodiscard]] utils::Timer *GetTimer() const;
 
     // Exception  --------------------------------------------------------------

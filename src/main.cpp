@@ -2,15 +2,8 @@
 // Created by Gueren Drive on 4/15/21.
 //
 
-// condition_variable::notify_one
-#include <thread>              // std::thread
-  // std::condition_variable
-//#include <mutex>             // std::mutex, std::unique_lock
+#include <thread>
 #include <chrono>
-//#include <future>
-
-
-#include <iostream>
 
 #include "config.hpp"
 #include "table.hpp"
@@ -31,7 +24,6 @@ void check_philosophers(sim::Table &table) {
   while (true) {
     if (is_dead(table.AtPhilolosopher(id))) {
       table.AtPhilolosopher(id).SayIDead();
-      std::cerr << table.AtPhilolosopher(id).timer_.MsElapsed() << std::endl;
       output_stream.lock();
       return;
     }
@@ -45,7 +37,9 @@ void check_philosophers(sim::Table &table) {
 [[noreturn]] void live(sim::Philosopher &p) {
   std::unique_lock<std::mutex> preparation(starting);
 
-  while (!start) {alarm_clock.wait(preparation);}
+  while (!start) {
+    alarm_clock.wait(preparation);
+  }
   preparation.unlock();
   if (p.GetId() % 2 == 0) {
     std::this_thread::sleep_for(std::chrono::microseconds(60));
