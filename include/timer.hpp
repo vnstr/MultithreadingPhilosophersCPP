@@ -30,6 +30,6 @@ namespace utils {
     std::mutex appeal_{};
     std::chrono::time_point<clock_t> m_beg_;
   };
-}
+}  // namespace utils
 
-#endif // TIMER_HPP
+#endif  // TIMER_HPP

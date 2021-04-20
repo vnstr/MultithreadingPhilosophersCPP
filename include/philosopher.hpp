@@ -49,6 +49,6 @@ namespace sim {
     int sleep_time_{sim::Config::Instance().GetSleepingTime()};
     int id_{};
   };
-}
+}  // namespace sim
 
-#endif //MULTITHREADINGPHILOSOPHERSCPP_PHILOSOPHER_HPP
+#endif  // MULTITHREADINGPHILOSOPHERSCPP_PHILOSOPHER_HPP

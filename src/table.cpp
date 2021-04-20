@@ -61,4 +61,4 @@ namespace sim {
   int Table::HowManyPhilosophersHaveEaten() const {
     return nb_of_times_each_eat_.load();
   }
-}
+}  // namespace sim

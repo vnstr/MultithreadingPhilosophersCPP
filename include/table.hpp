@@ -38,6 +38,6 @@ namespace sim {
     std::atomic<int> nb_of_times_each_eat_{0};
     int philosopher_amount_{Config::Instance().GetPhilosophersAmount()};
   };
-}
+}  // namespace sim
 
-#endif //MULTITHREADINGPHILOSOPHERSCPP_TABLE_HPP
+#endif  // MULTITHREADINGPHILOSOPHERSCPP_TABLE_HPP

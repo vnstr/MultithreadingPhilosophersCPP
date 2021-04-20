@@ -8,7 +8,7 @@
 
 #include "philosopher.hpp"
 
-namespace sim{
+namespace sim {
   sim::Philosopher::Philosopher(int id) : id_(id) {}
 
   // Setters, getters
@@ -83,4 +83,4 @@ namespace sim{
     std::cout << simulation_timer_->MsElapsed() << " ";
     std::cout << id_ << " has taken fork" << std::endl;
   }
-}
+}  // namespace sim

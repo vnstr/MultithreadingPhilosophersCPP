@@ -110,4 +110,4 @@ namespace sim {
   [[maybe_unused]] const char* Config::ConfigError::what() const noexcept {
     return "bad configuration";
   }
-}
+}  // namespace sim

@@ -14,7 +14,7 @@ std::mutex output_stream;
 std::condition_variable alarm_clock;
 bool start = false;
 
-bool is_dead(sim::Philosopher &p) {
+bool IsDead(sim::Philosopher &p) {
   return p.timer_.MsElapsed() >= sim::Config::Instance().GetLifetime() + 5;
 }
 
@@ -23,11 +23,11 @@ bool EveryoneAte(const sim::Table &t) {
          sim::Config::Instance().GetNbOfTimesEachShouldEat();
 }
 
-void check_philosophers(sim::Table &table) {
+void CheckPhilosophers(sim::Table &table) {
   int id = 1;
 
   while (true) {
-    if (is_dead(table.AtPhilolosopher(id))) {
+    if (IsDead(table.AtPhilolosopher(id))) {
       table.AtPhilolosopher(id).SayIDead();
       output_stream.lock();
       return;
@@ -44,7 +44,7 @@ void check_philosophers(sim::Table &table) {
   }
 }
 
-[[noreturn]] void live(sim::Philosopher &p) {
+[[noreturn]] void Live(sim::Philosopher &p) {
   std::unique_lock<std::mutex> preparation(starting);
 
   while (!start) {
@@ -68,13 +68,13 @@ int main(int argc, char **argv) {
   sim::Table table;
 
   for (int i = 0; i < table.GetPhilosopherAmount(); ++i) {
-    std::thread(live, std::ref(table.AtPhilolosopher(i + 1))).detach();
+    std::thread(Live, std::ref(table.AtPhilolosopher(i + 1))).detach();
   }
-  std::this_thread::sleep_for(std::chrono::milliseconds (100));
+  std::this_thread::sleep_for(std::chrono::milliseconds(100));
   start = true;
   timer.Reset();
   alarm_clock.notify_all();
-  check_philosophers(table);
+  CheckPhilosophers(table);
   std::this_thread::sleep_for(std::chrono::seconds(1));
   return 0;
 }

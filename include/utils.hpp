@@ -11,6 +11,6 @@
 
 namespace utils {
   bool IsDigits(const std::string& s);
-}
+}  // namespace utils
 
-#endif //MULTITHREADINGPHILOSOPHERSCPP_UTILS_HPP
+#endif  // MULTITHREADINGPHILOSOPHERSCPP_UTILS_HPP

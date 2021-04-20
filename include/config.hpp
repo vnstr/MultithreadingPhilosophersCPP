@@ -19,6 +19,7 @@ namespace sim {
     Config(const Config &x) = delete;
     Config &operator=(const Config &x) = delete;
     static Config &Instance();
+
    private:
     Config() = default;
 
@@ -51,6 +52,7 @@ namespace sim {
     class ConfigError {
       [[maybe_unused]] virtual const char* what() const noexcept;
     };
+
    private:
     // Config fields
     std::mutex *output_stream_;
@@ -65,6 +67,6 @@ namespace sim {
     typedef void(Config::*Setter)(int);
     static std::map<int, Setter> setters_;
   };
-}
+}  // namespace sim
 
-#endif //MULTITHREADINGPHILOSOPHERSCPP_CONFIG_HPP
+#endif  // MULTITHREADINGPHILOSOPHERSCPP_CONFIG_HPP

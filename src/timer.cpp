@@ -31,5 +31,4 @@ namespace utils {
     return std::chrono::
     duration_cast<mcsecond_t>(clock_t::now() - m_beg_).count();
   }
-
-}
+}  // namespace utils
